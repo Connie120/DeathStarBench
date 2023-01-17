@@ -24,9 +24,9 @@ target_link_libraries(
     Boost::log_setup
     Boost::program_options
     jaegertracing
-    /usr/local/lib/libhiredis.a
-    /usr/local/lib/libhiredis_ssl.a
-    /usr/local/lib/libredis++.a
+    /home/kang222/projects/rpu-scalar/hiredis-install/lib/libhiredis.a
+    /home/kang222/projects/rpu-scalar/hiredis-install/lib/libhiredis_ssl.a
+    /home/kang222/projects/rpu-scalar/redis-install/lib/libredis++.a
     OpenSSL::SSL
 )
 

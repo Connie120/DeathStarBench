@@ -1,0 +1,15 @@
+export THRIFT_HOME=$HOME/projects/rpu-scalar/thrift-install/
+export thrift_HOME=$THRIFT_HOME
+export LD_LIBRARY_PATH=$HOME/projects/rpu-scalar/thrift-install/lib/:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/projects/rpu-scalar/jaeger-install/lib/:$LD_LIBRARY_PATH
+export LIBRARY_PATH=$HOME/projects/rpu-scalar/yaml-cpp-install/lib/:$LIBRARY_PATH
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:$HOME/projects/rpu-scalar/mongo-c-driver-install/
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:$HOME/projects/rpu-scalar/opentracing-install/
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:$HOME/projects/rpu-scalar/yaml-cpp-install/
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:$HOME/projects/rpu-scalar/boost-install/
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:$HOME/projects/rpu-scalar/rabbitmq-c-install/
+# env "libbson-1.0_DIR=$HOME/projects/rpu-scalar/mongo-c-driver-install/" bash
+export nlohmann_json_DIR=$HOME/projects/rpu-scalar/nlohmann-json-install/
+export amqpcpp_DIR=$HOME/projects/rpu-scalar/amqpcpp-install/
+# export boost_log_DIR=$HOME/projects/rpu-scalar/boost_1_65_1/build/
+export LIBMEMCACHED_VERSION_STRING='1.0.9'

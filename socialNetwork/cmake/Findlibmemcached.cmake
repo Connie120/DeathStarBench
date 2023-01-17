@@ -35,9 +35,9 @@ else()
     set(libmemcachedUtil_lib "memcachedutil")
 endif()
 
-find_path(LIBMEMCACHED_INCLUDE_DIR libmemcached/memcached.hpp PATHS /usr/include /usr/share/include /usr/local/include PATH_SUFFIXES libmemcached)
-find_library(LIBMEMCACHEDCORE_LIBRARY NAMES ${libmemcached_lib} PATHS /usr/lib usr/lib/libmemcached /usr/share /usr/lib64 /usr/local/lib /usr/local/lib64)
-find_library(LIBMEMCACHEDUTIL_LIBRARY NAMES ${libmemcachedUtil_lib} PATHS /usr/lib /usr/share /usr/lib64 /usr/local/lib /usr/local/lib64)
+find_path(LIBMEMCACHED_INCLUDE_DIR libmemcached/memcached.hpp PATHS /home/kang222/projects/rpu-scalar/libmemcached-1.0.9/build/include /usr/include /usr/share/include /usr/local/include PATH_SUFFIXES libmemcached)
+find_library(LIBMEMCACHEDCORE_LIBRARY NAMES ${libmemcached_lib} PATHS /home/kang222/projects/rpu-scalar/libmemcached-1.0.9/build/lib /usr/lib usr/lib/libmemcached /usr/share /usr/lib64 /usr/local/lib /usr/local/lib64)
+find_library(LIBMEMCACHEDUTIL_LIBRARY NAMES ${libmemcachedUtil_lib} PATHS /home/kang222/projects/rpu-scalar/libmemcached-1.0.9/build/lib /usr/lib /usr/share /usr/lib64 /usr/local/lib /usr/local/lib64)
 
 set(LIBMEMCACHED_LIBRARIES ${LIBMEMCACHEDCORE_LIBRARY} ${LIBMEMCACHEDUTIL_LIBRARY})
 
@@ -81,25 +81,25 @@ if((LIBMEMCACHEDCORE_LIBRARY STREQUAL "LIBMEMCACHEDCORE_LIBRARY-NOTFOUND"
         add_library(libmemcached SHARED IMPORTED GLOBAL)
         add_library(libmemcachedutil SHARED IMPORTED GLOBAL)
         set_property(TARGET libmemcached
-            PROPERTY IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcached.so.11.0.0)
+            PROPERTY IMPORTED_LOCATION /home/kang222/projects/rpu-scalar/libmemcached-1.0.9/build/lib/libmemcached.so.11.0.0)
         set_property(TARGET libmemcachedutil
-            PROPERTY IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcachedutil.so.2.0.0)
+            PROPERTY IMPORTED_LOCATION /home/kang222/projects/rpu-scalar/libmemcached-1.0.9/build/lib/libmemcachedutil.so.2.0.0)
         set_property(TARGET libmemcached
             PROPERTY IMPORTED_LINK_DEPENDENT_LIBRARIES libmemcachedutil)
         add_dependencies(libmemcached generate-libmemcached)
         add_dependencies(libmemcachedutil generate-libmemcached)
 
-        if(PLATFORM)
-            install(CODE "set(ENV{LD_LIBRARY_PATH} \"\$ENV{LD_LIBRARY_PATH}:${CMAKE_BINARY_DIR}:${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs\")")
-            install(PROGRAMS
-                ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcached.so
-                ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcached.so.11
-                ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcached.so.11.0.0
-                ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcachedutil.so
-                ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcachedutil.so.2
-                ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcachedutil.so.2.0.0
-                DESTINATION lib)
-        endif()
+        #if(PLATFORM)
+        #    install(CODE "set(ENV{LD_LIBRARY_PATH} \"\$ENV{LD_LIBRARY_PATH}:${CMAKE_BINARY_DIR}:${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs\")")
+        #    install(PROGRAMS
+        #        ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcached.so
+        #        ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcached.so.11
+        #        ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcached.so.11.0.0
+        #        ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcachedutil.so
+        #        ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcachedutil.so.2
+        #        ${CMAKE_BINARY_DIR}/build-libmemcached/libmemcached/.libs/libmemcachedutil.so.2.0.0
+        #        DESTINATION lib)
+        #endif()
     endif()
 
     set(LIBMEMCACHEDCORE_LIBRARY $<TARGET_FILE:libmemcached>)
