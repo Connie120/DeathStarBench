@@ -15,14 +15,19 @@ RUN cd /social-network-microservices \
     && mkdir -p build \
     && cd build \
     && cmake -DCMAKE_BUILD_TYPE=Debug .. \
-    && make -j$(nproc) \
+    && make -j4 \
     && make install
+
+COPY x86_tracing_pintool/ /x86_tracing_pintool/
+RUN make clean -C /x86_tracing_pintool/pin-3.15-98253-gb56e429b1-gcc-linux/source/tools/ManualExamples/ \
+    && make -C /x86_tracing_pintool/pin-3.15-98253-gb56e429b1-gcc-linux/source/tools/ManualExamples/ 
 
 FROM ubuntu:16.04
 
 # Copy compiled C++ binaries and dependencies
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
 COPY --from=builder /usr/local/lib/* /usr/local/lib/
+COPY --from=builder /x86_tracing_pintool/* /x86_tracing_pintool/
 
 # Install system dependencies
 RUN apt-get update && \
