@@ -200,14 +200,24 @@ services:
     #    ports:
     #      - 10007:9090
     restart: always
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_PTRACE
     depends_on:
       jaeger-agent:
         condition: service_started
+    ulimits:
+      core:
+        soft: -1
+        hard: -1
+    init: true
     entrypoint: tail -F anything
     # entrypoint: TextService
     # entrypoint: /x86_tracing_pintool/pin -t /x86_tracing_pintool/source/tools/ManualExamples/obj-intel64/bbl.so -o /tmp/traces/ -- TextService
     volumes:
       - ./config:/social-network-microservices/config
+      - /tmp/:/tmp/
 
   unique-id-service:
     image: kang222/social-network-microservices:latest

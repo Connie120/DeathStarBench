@@ -29,6 +29,12 @@ COPY --from=builder /usr/local/bin/* /usr/local/bin/
 COPY --from=builder /usr/local/lib/* /usr/local/lib/
 COPY --from=builder /x86_tracing_pintool/* /x86_tracing_pintool/
 
+RUN apt-get update -y && \
+    apt-get install -y curl && \
+    apt-get install -y gdb && \
+    apt-get install -y make && \
+    apt-get install -y vim
+
 # Install system dependencies
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
